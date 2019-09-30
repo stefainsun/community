@@ -4,11 +4,11 @@ public class User {
     int id;
     String name;
     String accountId;
-    String toker;
-    String gtmlCreate;
-    String gmtModified;
+    String token;
+    long gmtCreate;
+    long gmtModified;
 
-    public String getAccountId() {
+    public String getAccountId(String s) {
         return accountId;
     }
 
@@ -16,27 +16,27 @@ public class User {
         this.accountId = accountId;
     }
 
-    public String getToker() {
-        return toker;
+    public String getToken() {
+        return token;
     }
 
-    public void setToker(String toker) {
-        this.toker = toker;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public String getGtmlCreate() {
-        return gtmlCreate;
+    public Long getGmtCreate() {
+        return gmtCreate;
     }
 
-    public void setGtmlCreate(String gtmlCreate) {
-        this.gtmlCreate = gtmlCreate;
+    public void setGmtCreate(Long gmtCreate) {
+        this.gmtCreate = gmtCreate;
     }
 
-    public String getGmtModified() {
+    public Long getGmtModified() {
         return gmtModified;
     }
 
-    public void setGmtModified(String gmtModified) {
+    public void setGmtModified(Long gmtModified) {
         this.gmtModified = gmtModified;
     }
 
