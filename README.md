@@ -9,9 +9,16 @@
 [Visual-Paradigm](https://www.visual-paradigm.com/)  
 [OKHttp](https://square.github.io/okhttp/)  
 
-##工具sadd
-
-=======
 ##工具
-=======
-##工具
+##脚本
+```sql
+CREATE TABLE USER
+(
+    ID integer DEFAULT (NEXT VALUE FOR PUBLIC.SYSTEM_SEQUENCE_A6AA7BE2_61F8_4E23_B8B1_CA5DD0D2D20F) AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    ACCOUNT_ID varchar(100),
+    NAME varchar(50),
+    TOKEN varchar(36),
+    GMT_CREATE bigint,
+    GMT_MODIFIED bigint
+)
+```
