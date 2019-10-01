@@ -20,13 +20,11 @@ public class HelloController {
         Cookie[] cookies = request.getCookies();
         if(cookies!=null){
             for (Cookie cookie : cookies) {
-
                 String name = cookie.getName();
                 System.out.println(name);
                 if(name.equals("token")){
                     String token = cookie.getValue();
                     User user = userMapper.findByToken(token);
-
                     if(user!=null){
                         request.getSession().setAttribute("user",user);
                     }
