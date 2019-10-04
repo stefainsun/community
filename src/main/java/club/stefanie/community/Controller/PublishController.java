@@ -45,12 +45,11 @@ public class PublishController {
                     question.setDescription(description);
                     question.setTag(tag);
                     question.setTitle(title);
-                    question.setGmtcreate(System.currentTimeMillis());
-                    question.setGmtmodified(question.getGmtcreate());
+                    question.setGmtCreate(System.currentTimeMillis());
+                    question.setGmtModified(question.getGmtCreate());
                     question.setCreator(user.getId());
                     questionMapper.create(question);
                     request.getSession().setAttribute("user",user);
-
                 }
             }
         }

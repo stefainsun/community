@@ -1,9 +1,10 @@
-package club.stefanie.community.model;
+package club.stefanie.community.dto;
 
+import club.stefanie.community.model.User;
 import lombok.Data;
 
 @Data
-public class Question {
+public class QuestionDTO {
     private int id;
     private String title;
     private String description;
@@ -13,5 +14,6 @@ public class Question {
     private String tag;
     private int viewCount;
     private int likeCount;
-
+    private User user;
+    private int commentCount;
 }

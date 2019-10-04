@@ -8,5 +8,20 @@ body{
 .btn-publish{
     float: right;
     margin-bottom: 30px;
-    margin-top: 10px;
+}
+.mb-title{
+    font-size: 14px;
+    color: blue;
+}
+.ml-img{
+    width:40px;
+    height:40px;
+}
+.mb-text{
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
+}
+.profile .section{
+    margin-top: 30px;
 }

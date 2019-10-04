@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>码匠社区</title>
+    <title th:text="${sectionName}"></title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <script src="/js/jquery.min.js"></script>
@@ -16,7 +16,7 @@
 
 
 <div th:insert="~{navigation::copy}"></div>
-<div class="container-fluid main">
+<div class="container-fluid main profile">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
             <h2>
@@ -26,7 +26,7 @@
             <hr>
             <div class="media" th:each="question: ${questions}">
                 <div class="media-left">
-                    <a href="#" th:if="${question.user!=null}">
+                    <a href="#">
                         <img th:src="${question.user.avatarUrl}" alt="图片消失啦" class="img-rounded ml-img">
                     </a>
                 </div>
@@ -38,38 +38,45 @@
         </div>
 
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <h3>啊啊啊啊啊啊啊啊啊啊</h3>
-            • 问题标题: 请用精简的语言描述您发布的问题，不超过25字<br>
-            • 问题补充: 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料：<br>
-            • 选择标签: 选择一个或者多个合适的标签，用逗号隔开，不超过10个字 <br>
+            <div class="list-group section">
+                <a href="/profile/questions" th:class="${section == 'question'}? 'list-group-item active':'list-group-item'">
+                    我的问题
+                </a>
+                <a href="/profile/repies" th:class="${section == 'repies'}? 'list-group-item active':'list-group-item'">
+                    最新回复
+                    <span class="badge">14</span>
+                </a>
+            </div>
         </div>
     </div>
     <nav aria-label="Page navigation">
         <ul class="pagination">
             <li>
-                <a th:href="@{/(page=1)}" aria-label="Previous" th:if="${pagination.showFirstPage}">
+                <a th:href="@{'/profile/'+${section}(page=${1})}" aria-label="Previous" th:if="${pagination.showFirstPage}">
                     <span aria-hidden="true">&lt;&lt;</span>
                 </a>
             </li>
             <li>
-                <a th:href="@{/(page=${pagination.page-1})}" aria-label="FirstPrevious" th:if="${pagination.showPrevious}">
+                <a th:href="@{'/profile/'+${section}(page=${pagination.page-1})}" aria-label="FirstPrevious" th:if="${pagination.showPrevious}">
                     <span aria-hidden="true">&lt;</span>
                 </a>
             </li>
             <li th:each="page:${pagination.pages}" th:class="${page == pagination.page}? 'active':''">
-                <a th:href="@{/(page=${page})}" th:text="${page}"></a></li>
+                <a th:href="@{'/profile/'+${section}(page=${page})}" th:text="${page}"></a>
+            </li>
             <li>
-                <a th:href="@{/(page=${pagination.page+1})}" aria-label="Next" th:if="${pagination.showNext}">
+                <a th:href="@{'/profile/'+${section}(page=${pagination.page+1})}" aria-label="Next" th:if="${pagination.showNext}">
                     <span aria-hidden="true">&gt;</span>
                 </a>
             </li>
             <li>
-                <a th:href="@{/(page=${pagination.totalPages})}" aria-label="LastNext" th:if="${pagination.showEndPage}">
+                <a th:href="@{'/profile/'+${section}(page=${pagination.totalPages})}" aria-label="LastNext" th:if="${pagination.showEndPage}">
                     <span aria-hidden="true">&gt;&gt;</span>
                 </a>
             </li>
         </ul>
     </nav>
+
 </div>
 </body>
 </html>
