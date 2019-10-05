@@ -15,18 +15,19 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class ProfileController {
+
     @Autowired
     QuestionUserService questionUserService;
     @Autowired
     UserMapper userMapper;
     @GetMapping("/profile/{action}")
     public String profile(@PathVariable(name = "action") String action,
-                          @RequestParam(name = "page",defaultValue = "1") int page,
-                          @RequestParam(name = "size",defaultValue = "2") int size,
+                          @RequestParam(name = "page",defaultValue = "1") Integer page,
+                          @RequestParam(name = "size",defaultValue = "2") Integer size,
                           HttpServletRequest request,
                           Model model){
-        if("questions".equals(action)){
-            model.addAttribute("section","questions");
+        if("question".equals(action)){
+            model.addAttribute("section","question");
             model.addAttribute("sectionName","我的提问");
         }
         if("repies".equals(action)){

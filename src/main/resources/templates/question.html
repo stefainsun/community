@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${question.title}+'-'+${question.user.name}"></title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <script src="/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="/css/community.css">
+
+
+</head>
+<body>
+
+
+<div th:insert="~{navigation::copy}"></div>
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <b>
+                <h3 th:text="${question.title}"></h3>
+            </b>
+            <span class="text-desc">
+             作者：<span th:text="${question.user.name}"></span> | 发布时间：<span th:text="${question.gmtCreate}"></span> | 阅读数： 27
+            </span>
+            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12"/>
+            <
+            <h4 th:text="${question.description}"></h4>
+            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <a class="text-desc" th:if="${session.user!=null&&session.user.id==question.creator}"
+               th:href="@{'/edit/'+${question.id}}">
+                <span class="glyphicon glyphicon-pencil"></span>编辑
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <h3>发起人</h3>
+            <div class="media">
+                <div class="media-left media-middle">
+                    <a href="#">
+                        <img class="img-circle ml-img" th:src="${question.user.avatarUrl}" alt="图片消失啦！">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading" th:text="${question.user.name}"></h4>
+                </div>
+            </div>
+            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h3>相关问题</h3>
+
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

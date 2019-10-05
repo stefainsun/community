@@ -8,6 +8,7 @@ import club.stefanie.community.model.Question;
 import club.stefanie.community.model.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -80,5 +81,25 @@ public class QuestionUserService {
         paginationDTO.setPagination(size,page,totalPage);
 
         return paginationDTO;
+    }
+
+    public QuestionDTO findbyId(int id) {
+        Question question = questionMapper.findById(id);
+        User user=userMapper.findByID(question.getCreator());
+        QuestionDTO questionDTO = new QuestionDTO();
+        BeanUtils.copyProperties(question,questionDTO);
+        questionDTO.setUser(user);
+        return questionDTO;
+    }
+
+    public void createOrUpdate(Question question) {
+        if(question.getId() == null){
+            questionMapper.create(question);
+        }
+        else{
+            question.setGmtModified(System.currentTimeMillis());
+            questionMapper.update(question);
+        }
+
     }
 }

@@ -5,9 +5,11 @@ import club.stefanie.community.dto.GithubUser;
 import club.stefanie.community.mapper.UserMapper;
 import club.stefanie.community.model.User;
 import club.stefanie.community.provider.GithubProvider;
+import club.stefanie.community.service.UserLoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,7 +23,7 @@ public class AuthorizeController {
     @Autowired
     private GithubProvider githubProvider;
     @Autowired
-    private UserMapper userMapper;
+    private UserLoginService userLoginService;
     @Value("${github.client.id}")
     private String cilent_id;
     @Value("${github.client.secret}")
@@ -51,13 +53,22 @@ public class AuthorizeController {
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
             user.setAvatarUrl(githubUser.getAvatar_url());
-            userMapper.insert(user);
+            userLoginService.updateOrInsert(user);
             response.addCookie(new Cookie("token",token));
             return "redirect:/";
         }
         else{
             return "redirect:/";
-
         }
+    }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,
+                       HttpServletResponse response
+    ){
+        request.getSession().removeAttribute("user");
+        Cookie cookie=new Cookie("token",null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
     }
 }

@@ -1,10 +1,7 @@
 package club.stefanie.community.mapper;
 
 import club.stefanie.community.model.Question;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -21,4 +18,8 @@ public interface QuestionMapper {
     int countByUser(@Param(value = "userId") int userId);
     @Select("select * from question where creator = #{userId} limit #{offset},#{size}")
     List<Question> listByUser(@Param(value = "userId") int userId, @Param(value = "offset") int offset,@Param(value = "size") int size);
+    @Select("select * from question where id = #{id}")
+    Question findById(@Param(value = "id") int id);
+    @Update("update question set title = #{title},gmt_modified = #{gmtModified},tag = #{tag},description = #{description} where id = #{id}")
+    void update(Question question);
 }

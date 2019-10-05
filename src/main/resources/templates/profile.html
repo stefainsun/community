@@ -31,7 +31,7 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <div  class="media-heading mb-title"><span th:text="${question.title}"></span></div>
+                    <div  class="media-heading mb-title"><a th:href="@{'/question/'+${question.id}}"><span th:text="${question.title}"></span>  </a></div>
                     <span class="mb-text"> <span th:text="${question.commentCount}"></span> 个评论 • <span th:text="${question.viewCount}"></span> 次浏览 • 时间<span th:text="${#dates.format(question.gmtCreate,'yyyy-mm-dd HH：mm：ss')}"></span></span>
                 </div>
             </div>
@@ -39,7 +39,7 @@
 
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <div class="list-group section">
-                <a href="/profile/questions" th:class="${section == 'questions'}? 'list-group-item active':'list-group-item'">
+                <a href="/profile/question" th:class="${section == 'question'}? 'list-group-item active':'list-group-item'">
                     我的问题
                 </a>
                 <a href="/profile/repies" th:class="${section == 'repies'}? 'list-group-item active':'list-group-item'">

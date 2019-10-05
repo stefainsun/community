@@ -26,12 +26,12 @@
             <hr>
             <div class="media" th:each="question: ${questions}">
                 <div class="media-left">
-                    <a href="#" th:if="${question.user!=null}">
+                    <a th:href="@{'/question/'+${question.id}}" th:if="${question.user!=null}">
                         <img th:src="${question.user.avatarUrl}" alt="图片消失啦" class="img-rounded ml-img">
                     </a>
                 </div>
                 <div class="media-body">
-                    <div  class="media-heading mb-title"><span th:text="${question.title}"></span></div>
+                    <div  class="media-heading mb-title"><a th:href="@{'/question/'+${question.id}}" th:text="${question.title}"></a></div>
                     <span class="mb-text"> <span th:text="${question.commentCount}"></span> 个评论 • <span th:text="${question.viewCount}"></span> 次浏览 • 时间<span th:text="${#dates.format(question.gmtCreate,'yyyy-mm-dd HH：mm：ss')}"></span></span>
                 </div>
             </div>
