@@ -31,20 +31,7 @@ public class HelloController {
                         @RequestParam(name = "page",defaultValue = "1") int page,
                         @RequestParam(name = "size",defaultValue = "5") int size
     ) {
-        Cookie[] cookies = request.getCookies();
-        if(cookies!=null){
-            for (Cookie cookie : cookies) {
-                String name = cookie.getName();
-                System.out.println(name);
-                if(name.equals("token")){
-                    String token = cookie.getValue();
-                    User user = userMapper.findByToken(token);
-                    if(user!=null){
-                        request.getSession().setAttribute("user",user);
-                    }
-                }
-            }
-        }
+
         PaginationDTO pagination =  questionUserService.list(page,size);
         model.addAttribute("pagination",pagination);
         model.addAttribute("questions",pagination.getQuestions());

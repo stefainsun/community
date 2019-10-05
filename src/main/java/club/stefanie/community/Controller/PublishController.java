@@ -34,26 +34,7 @@ public class PublishController {
                             Model model,
                             HttpServletRequest request)
     {
-        User user=null;
-        Cookie[] cookies = request.getCookies();
-        if(cookies!=null){
-            for (Cookie cookie : cookies) {
-                if(cookie.getName().equals("token")){
-                    String token=cookie.getValue();
-                    user=userMapper.findByToken(token);
-                    Question question = new Question();
-                    question.setDescription(description);
-                    question.setTag(tag);
-                    question.setTitle(title);
-                    question.setGmtCreate(System.currentTimeMillis());
-                    question.setGmtModified(question.getGmtCreate());
-                    question.setCreator(user.getId());
-                    questionMapper.create(question);
-                    request.getSession().setAttribute("user",user);
-                }
-            }
-        }
-
+        User user= (User) request.getSession().getAttribute("user");
         if(user==null){
             model.addAttribute("error","用户未登录");
             return "/publish";
