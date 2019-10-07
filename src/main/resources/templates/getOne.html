@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+<input type="button" value="通过AJAX获取多个对象" id="sender">
+<div id="msg"></div>
+<script>
+    $('#sender').click(function () {
+        var url = "comment";
+        var comment = {
+            "content":"nihao",
+            "parentId":1,
+            "type":1,
+            "commentator":1
+        }
+        $.ajax({
+            url:url,
+            data:JSON.stringify(comment),
+            type:'post',
+            contentType : "application/json;charset=UTF-8",
+            success:function (data) {
+                var json = JSON.parse(data);
+                console.log(json);
+                alert("AA");
+
+            }
+        });
+    })
+</script>
+</body>
+</html>

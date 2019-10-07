@@ -2,6 +2,7 @@ package club.stefanie.community.service;
 
 import club.stefanie.community.dto.PaginationDTO;
 import club.stefanie.community.dto.QuestionDTO;
+import club.stefanie.community.exception.QuestionNotFindException;
 import club.stefanie.community.mapper.QuestionMapper;
 import club.stefanie.community.mapper.UserMapper;
 import club.stefanie.community.model.Question;
@@ -83,8 +84,13 @@ public class QuestionUserService {
         return paginationDTO;
     }
 
-    public QuestionDTO findbyId(int id) {
+    public QuestionDTO findbyId(int id) throws QuestionNotFindException{
+        questionMapper.updateViewCount(id);
         Question question = questionMapper.findById(id);
+       if(question == null){
+            throw new QuestionNotFindException("问题不存在啊");
+       }
+
         User user=userMapper.findByID(question.getCreator());
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question,questionDTO);

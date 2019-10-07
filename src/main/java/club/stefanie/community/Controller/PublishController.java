@@ -1,5 +1,6 @@
 package club.stefanie.community.controller;
 
+import club.stefanie.community.exception.QuestionNotFindException;
 import club.stefanie.community.mapper.QuestionMapper;
 import club.stefanie.community.mapper.UserMapper;
 import club.stefanie.community.model.Question;
@@ -77,7 +78,14 @@ public class PublishController {
             model.addAttribute("error","用户未登录");
             return "/publish";
         }
-        Question question = questionMapper.findById(id);
+        Question question=null;
+
+        question = questionMapper.findById(id);
+        if(question == null){
+            model.addAttribute("error","编辑越界啦！");
+            return "errorHandler";
+        }
+
         model.addAttribute("title",question.getTitle());
         model.addAttribute("tag",question.getTag());
         model.addAttribute("description",question.getDescription());

@@ -22,4 +22,7 @@ public interface QuestionMapper {
     Question findById(@Param(value = "id") int id);
     @Update("update question set title = #{title},gmt_modified = #{gmtModified},tag = #{tag},description = #{description} where id = #{id}")
     void update(Question question);
+    @Update("update question set view_count = view_count+1 where id = #{id}")
+    void updateViewCount(@Param(value = "id") int id);
+
 }
